@@ -4,11 +4,18 @@ import re
 import os
 
 #####
-# bookmark path
+# bookmark path <<< USER INPUT
 BOOKMARK_FILEPATH = "~/Google Drive/books/comp/assembly-language-step-by-step-bookmarks.txt"
 DELTA_PAGENUM = 3
-BASENAME = os.path.basename(BOOKMARK_FILEPATH)
-print(BASENAME)
+
+#####
+# generate new bookmark filename
+#BASENAME = os.path.basename(BOOKMARK_FILEPATH)
+#BASENAME_WITHOUT_EXT = os.path.splitext(BASENAME)[0]
+#BOOKMARK_PDFTK_COMPATIBLE_FILEPATH = ""
+BOOKMARK_WITHOUT_EXT = os.path.splitext(BOOKMARK_FILEPATH)[0]
+BOOKMARK_EXT = os.path.splitext(BOOKMARK_FILEPATH)[1]
+BOOKMARK_PDFTK_COMPATIBLE_FILEPATH = BOOKMARK_WITHOUT_EXT + "-new" + BOOKMARK_EXT
 
 def increment_pagenum(mystr, num):
     """input: (string, counter) / output: replaced string """
@@ -46,7 +53,7 @@ def main():
         print("lines[", i, "]'s value:", lines[i])
     for line in lines:
         print(line)
-    new_bmf = open(os.path.expanduser("~/booky/mynewbookmarks.txt"), "w")
+    new_bmf = open(os.path.expanduser(BOOKMARK_PDFTK_COMPATIBLE_FILEPATH), "w")
     new_bmf.writelines(lines)
 main()
 
