@@ -3,11 +3,17 @@
 import re
 import os
 
+#####
+# bookmark path
+BOOKMARK_FILEPATH = "~/Google Drive/books/comp/assembly-language-step-by-step-bookmarks.txt"
+DELTA_PAGENUM = 3
+BASENAME = os.path.basename(BOOKMARK_FILEPATH)
+print(BASENAME)
 
 def increment_pagenum(mystr, num):
     """input: (string, counter) / output: replaced string """
     regex_pattern = re.search(r",\s*(\d+)", mystr)
-    if regex_pattern == None:
+    if regex_pattern is None:
         return mystr
     else:
         print("regex_pattern.group(1) is", regex_pattern.group(1))
@@ -26,7 +32,7 @@ def increment_pagenum(mystr, num):
 
 def main():
     """ main """
-    bmf = open(os.path.expanduser("~/booky/mybookmarks.txt"), "r")
+    bmf = open(os.path.expanduser(BOOKMARK_FILEPATH), "r")
     lines = bmf.readlines()
     #for i in range(len(lines)):
         #print("i -> value:", i)
@@ -36,12 +42,11 @@ def main():
     print("lines's value:", lines)
     for i in range(len(lines)):
         print("i -> value:", i)
-        lines[i] = increment_pagenum(lines[i],1)
+        lines[i] = increment_pagenum(lines[i],DELTA_PAGENUM)
         print("lines[", i, "]'s value:", lines[i])
     for line in lines:
         print(line)
     new_bmf = open(os.path.expanduser("~/booky/mynewbookmarks.txt"), "w")
     new_bmf.writelines(lines)
-
 main()
 
